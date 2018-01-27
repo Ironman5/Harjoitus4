@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Harjoitus 4</string>
+    <string name="action_settings">Settings</string>
+    <string name="default_txt">0</string>
+    <string name="add_txt">+</string>
+    <string name="subtract_txt">-</string>
+    <string name="multiply_txt">*</string>
+    <string name="divide_txt">/</string>
+    <string name="count_txt">Laske</string>
+    <string name="result_txt">0</string>
+    <string name="deleteAll_button">Tyhjennä kaikki</string>
+    <string name="log_button">Näytä loki</string>
+</resources>
