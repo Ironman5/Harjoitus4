@@ -1,5 +1,6 @@
 package com.example.mika.harjoitus4;
 
+        import android.content.Intent;
         import android.support.v7.app.AppCompatActivity;
         import android.os.Bundle;
         import android.view.View;
@@ -7,11 +8,13 @@ package com.example.mika.harjoitus4;
         import android.widget.EditText;
         import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity{
 
-    private Button buttonAdd,buttonSubtract,buttonMultiply,buttonDivide,buttonDeleteAll;
+    public static final String EXTRA_MESSAGE = "mika.example.harjoitus4.MESSAGE";
     private TextView resultAdd,resultSubtract,resultMultiply,resultDivide;
     private EditText numAdd1,numAdd2,numSub1,numSub2,numMulti1,numMulti2,numDiv1,numDiv2;
+    private String loki = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,59 +24,51 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void init() {
 
-        buttonAdd = (Button)findViewById(R.id.buttonAdd);
-        buttonSubtract = (Button)findViewById(R.id.buttonSubtract);
-        buttonMultiply = (Button)findViewById(R.id.buttonMultiply);
-        buttonDivide = (Button)findViewById(R.id.buttonDivide);
-        buttonDeleteAll = (Button)findViewById(R.id.buttonDeleteAll);
+        resultAdd = findViewById(R.id.resultAdd);
+        resultSubtract = findViewById(R.id.resultSubtract);
+        resultMultiply = findViewById(R.id.resultMultiply);
+        resultDivide= findViewById(R.id.resultDivide);
 
-        resultAdd = (TextView)findViewById(R.id.resultAdd);
-        resultSubtract = (TextView)findViewById(R.id.resultSubtract);
-        resultMultiply = (TextView)findViewById(R.id.resultMultiply);
-        resultDivide= (TextView)findViewById(R.id.resultDivide);
-
-        numAdd1 = (EditText)findViewById(R.id.numAdd1);
-        numAdd2 = (EditText)findViewById(R.id.numAdd2);
-        numSub1 = (EditText)findViewById(R.id.numSub1);
-        numSub2 = (EditText)findViewById(R.id.numSub2);
-        numMulti1 = (EditText)findViewById(R.id.numMulti1);
-        numMulti2 = (EditText)findViewById(R.id.numMulti2);
-        numDiv1 = (EditText)findViewById(R.id.numDiv1);
-        numDiv2 = (EditText)findViewById(R.id.numDiv2);
-
-        buttonAdd.setOnClickListener(this);
-        buttonSubtract.setOnClickListener(this);
-        buttonMultiply.setOnClickListener(this);
-        buttonDivide.setOnClickListener(this);
-        buttonDeleteAll.setOnClickListener(this);
+        numAdd1 = findViewById(R.id.numAdd1);
+        numAdd2 = findViewById(R.id.numAdd2);
+        numSub1 = findViewById(R.id.numSub1);
+        numSub2 = findViewById(R.id.numSub2);
+        numMulti1 = findViewById(R.id.numMulti1);
+        numMulti2 = findViewById(R.id.numMulti2);
+        numDiv1 = findViewById(R.id.numDiv1);
+        numDiv2 = findViewById(R.id.numDiv2);
 
     }
 
-    @Override
-    public void onClick(View view) {
+    public void sendMessage(View view) {
 
         float num1,num2,num3,num4,num5,num6,num7,num8;
 
         switch (view.getId()){
+
             case R.id.buttonAdd:
                 num1 = Integer.parseInt(numAdd1.getText().toString());
                 num2 = Integer.parseInt(numAdd2.getText().toString());
                 resultAdd.setText(String.valueOf(num1+num2));
+                loki += String.valueOf(num1) + " + " + String.valueOf(num2) + " = " + String.valueOf(num1+num2) + "\n";
                 break;
             case R.id.buttonSubtract:
                 num3 = Integer.parseInt(numSub1.getText().toString());
                 num4 = Integer.parseInt(numSub2.getText().toString());
                 resultSubtract.setText(String.valueOf(num3-num4));
+                loki += String.valueOf(num3) + " - " + String.valueOf(num4) + " = " + String.valueOf(num3-num4) + "\n";
                 break;
             case R.id.buttonMultiply:
                 num5 = Integer.parseInt(numMulti1.getText().toString());
                 num6 = Integer.parseInt(numMulti2.getText().toString());
                 resultMultiply.setText(String.valueOf(num5*num6));
+                loki += String.valueOf(num5) + " * " + String.valueOf(num6) + " = " + String.valueOf(num5*num6) + "\n";
                 break;
             case R.id.buttonDivide:
                 num7 = Integer.parseInt(numDiv1.getText().toString());
                 num8 = Integer.parseInt(numDiv2.getText().toString());
                 resultDivide.setText(String.valueOf(num7/num8));
+                loki += String.valueOf(num7) + " / " + String.valueOf(num8) + " = " + String.valueOf(num7/num8) + "\n";
                 break;
             case R.id.buttonDeleteAll:
                 resultAdd.setText("");
@@ -88,6 +83,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 numMulti2.setText("");
                 numDiv1.setText("");
                 numDiv2.setText("");
+                loki = "";
+                break;
+            case R.id.buttonShowLog:
+                Intent intent = new Intent(this, DisplayLogActivity.class);
+                intent.putExtra(EXTRA_MESSAGE,loki);
+                startActivity(intent);
+                loki = "";
                 break;
             default:
                 break;
@@ -95,3 +97,5 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 }
+
+
