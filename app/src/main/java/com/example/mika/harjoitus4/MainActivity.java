@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity{
         resultAdd = findViewById(R.id.resultAdd);
         resultSubtract = findViewById(R.id.resultSubtract);
         resultMultiply = findViewById(R.id.resultMultiply);
-        resultDivide= findViewById(R.id.resultDivide);
+        resultDivide = findViewById(R.id.resultDivide);
 
         numAdd1 = findViewById(R.id.numAdd1);
         numAdd2 = findViewById(R.id.numAdd2);
@@ -43,6 +43,8 @@ public class MainActivity extends AppCompatActivity{
     public void sendMessage(View view) {
 
         float num1,num2,num3,num4,num5,num6,num7,num8;
+
+        Intent intent = new Intent(this, DisplayLogActivity.class);
 
         switch (view.getId()){
 
@@ -86,7 +88,6 @@ public class MainActivity extends AppCompatActivity{
                 loki = "";
                 break;
             case R.id.buttonShowLog:
-                Intent intent = new Intent(this, DisplayLogActivity.class);
                 intent.putExtra(EXTRA_MESSAGE,loki);
                 startActivity(intent);
                 loki = "";
